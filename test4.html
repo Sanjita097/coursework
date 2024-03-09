@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Stars</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            animation: fallAnimation linear infinite;
+        }
+
+        @keyframes fallAnimation {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Generate random stars */
+        @keyframes spawnStars {
+            from {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+        }
+
+        /* Apply animation to multiple stars */
+        .star:nth-child(1) {
+            animation: fallAnimation linear infinite 2s;
+        }
+        .star:nth-child(2) {
+            animation: fallAnimation linear infinite 3s;
+        }
+        .star:nth-child(3) {
+            animation: fallAnimation linear infinite 4s;
+        }
+        /* Add more .star:nth-child(n) rules for additional stars */
+
+        /* Randomize star positions */
+        .star:nth-child(1) { animation-name: spawnStars; animation-delay: 0s; }
+        .star:nth-child(2) { animation-name: spawnStars; animation-delay: -2s; }
+        .star:nth-child(3) { animation-name: spawnStars; animation-delay: -4s; }
+        /* Adjust animation-delay for more stars */
+
+    </style>
+</head>
+<body>
+
+    <!-- Add more stars by duplicating this line -->
+    <div class="star" style="left: calc(50vw + 10px);"></div>
+
+    <script>
+        const numberOfStars = 10; // Set the desired number of stars
+
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDuration = `${Math.random() * 2 + 1}s`; // Random duration between 1s and 3s
+            document.body.appendChild(star);
+        }
+    </script>
+
+</body>
+</html>
